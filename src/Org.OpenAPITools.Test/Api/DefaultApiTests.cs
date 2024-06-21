@@ -87,17 +87,6 @@ namespace Org.OpenAPITools.Test.Api
         }
 
         /// <summary>
-        /// Test LastpushesGet
-        /// </summary>
-        [Fact]
-        public void LastpushesGetTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //string? limit = null;
-            //instance.LastpushesGet(limit);
-        }
-
-        /// <summary>
         /// Test MetrickeysGet
         /// </summary>
         [Fact]
@@ -126,17 +115,6 @@ namespace Org.OpenAPITools.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //instance.PingGet();
-        }
-
-        /// <summary>
-        /// Test RootPost
-        /// </summary>
-        [Fact]
-        public void RootPostTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //PayloadModel? payloadModel = null;
-            //instance.RootPost(payloadModel);
         }
     }
 }

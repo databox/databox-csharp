@@ -7,45 +7,6 @@ servers:
 - description: Dev mode server description
   url: https://push.databox.com
 paths:
-  /:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PayloadModel'
-          application/vnd.databox.v2+json:
-            schema:
-              type: object
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                status: OK
-                message: ""
-          description: OK
-        "400":
-          content:
-            application/json:
-              example:
-                status: Bad Request
-                message: Bad request - Exceeded request count limit!
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              example:
-                status: Unauthorized
-                message: Unauthorized - Invalid token!
-          description: Unauthorized
-        "500":
-          content:
-            application/json:
-              example:
-                status: Internal Server Error
-                message: An unhandled exception occurred while processing your request!
-          description: Internal Server Error
   /data:
     delete:
       responses:
@@ -80,19 +41,6 @@ paths:
       responses:
         "200":
           description: OK
-  /lastpushes:
-    get:
-      parameters:
-      - explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          description: OK
   /metrickeys:
     get:
       responses:
@@ -115,137 +63,8 @@ paths:
       responses:
         "200":
           description: OK
-  /q/health:
-    description: MicroProfile Health Endpoint
-    get:
-      description: Check the health of the application
-      operationId: microprofile_health_root
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: OK
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: Service Unavailable
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: Internal Server Error
-      summary: An aggregated view of the Liveness and Readiness of this application
-      tags:
-      - MicroProfile Health
-    summary: MicroProfile Health provides a way for your application to distribute
-      information about its healthiness state to state whether or not it is able to
-      function properly
-  /q/health/live:
-    description: MicroProfile Health - Liveness Endpoint
-    get:
-      description: Check the liveness of the application
-      operationId: microprofile_health_liveness
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: OK
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: Service Unavailable
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: Internal Server Error
-      summary: The Liveness check of this application
-      tags:
-      - MicroProfile Health
-    summary: Liveness checks are utilized to tell whether the application should be
-      restarted
-  /q/health/ready:
-    description: MicroProfile Health - Readiness Endpoint
-    get:
-      description: Check the readiness of the application
-      operationId: microprofile_health_readiness
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: OK
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: Service Unavailable
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheckResponse'
-          description: Internal Server Error
-      summary: The Readiness check of this application
-      tags:
-      - MicroProfile Health
-    summary: Readiness checks are used to tell whether the application is able to
-      process requests
 components:
   schemas:
-    PayloadModel:
-      example:
-        data:
-        - $<metric_name>: 123.4
-          date: 2021-03-01 00:00:00
-          <dimension_name>: Organic
-          unit: USD
-        - $<metric_name>: 123.4
-          periodFrom: 2021-03-01 00:00:00
-          periodTo: 2021-03-16 00:00:00
-          <dimension_name>: Organic
-          unit: USD
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PayloadDataModel'
-          type: array
-      type: object
-    PayloadDataModel:
-      properties:
-        $<metric_name>:
-          description: example metric name would be '$sales'
-          type: number
-        <dimension_name>:
-          description: example dimension would be 'channel'
-          type: string
-        unit:
-          type: string
-        periodFrom:
-          description: required if date not provided
-          type: string
-        periodTo:
-          description: required if date not provided
-          type: string
-        date:
-          description: required periods not provided
-          type: string
-      required:
-      - "$<metric_name>,"
-      - date
-      type: object
     ApiResponse:
       properties:
         status:
@@ -294,20 +113,6 @@ components:
           type: string
         value:
           type: string
-      type: object
-    HealthCheckResponse:
-      example:
-        data: "{}"
-        name: name
-        state: DOWN
-      properties:
-        data:
-          nullable: true
-          type: object
-        name:
-          type: string
-        state:
-          $ref: '#/components/schemas/State'
       type: object
     State:
       enum:

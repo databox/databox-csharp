@@ -114,23 +114,15 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**DataDelete**](docs/DefaultApi.md#datadelete) | **DELETE** /data | 
 *DefaultApi* | [**DataMetricKeyDelete**](docs/DefaultApi.md#datametrickeydelete) | **DELETE** /data/{metricKey} | 
 *DefaultApi* | [**DataPost**](docs/DefaultApi.md#datapost) | **POST** /data | 
-*DefaultApi* | [**LastpushesGet**](docs/DefaultApi.md#lastpushesget) | **GET** /lastpushes | 
 *DefaultApi* | [**MetrickeysGet**](docs/DefaultApi.md#metrickeysget) | **GET** /metrickeys | 
 *DefaultApi* | [**MetrickeysPost**](docs/DefaultApi.md#metrickeyspost) | **POST** /metrickeys | 
 *DefaultApi* | [**PingGet**](docs/DefaultApi.md#pingget) | **GET** /ping | 
-*DefaultApi* | [**RootPost**](docs/DefaultApi.md#rootpost) | **POST** / | 
-*MicroProfileHealthApi* | [**MicroprofileHealthLiveness**](docs/MicroProfileHealthApi.md#microprofilehealthliveness) | **GET** /q/health/live | The Liveness check of this application
-*MicroProfileHealthApi* | [**MicroprofileHealthReadiness**](docs/MicroProfileHealthApi.md#microprofilehealthreadiness) | **GET** /q/health/ready | The Readiness check of this application
-*MicroProfileHealthApi* | [**MicroprofileHealthRoot**](docs/MicroProfileHealthApi.md#microprofilehealthroot) | **GET** /q/health | An aggregated view of the Liveness and Readiness of this application
 
 
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
  - [Model.ApiResponse](docs/ApiResponse.md)
- - [Model.HealthCheckResponse](docs/HealthCheckResponse.md)
- - [Model.PayloadDataModel](docs/PayloadDataModel.md)
- - [Model.PayloadModel](docs/PayloadModel.md)
  - [Model.PushData](docs/PushData.md)
  - [Model.PushDataAttribute](docs/PushDataAttribute.md)
  - [Model.State](docs/State.md)

@@ -1,0 +1,7 @@
+{
+  "packageName": "Databox",
+  "packageVersion": "{VERSION}",
+  "netCoreProjectFile": true,
+  "library": "httpclient",
+  "targetFramework": "net6.0;net7.0;net8.0"
+}

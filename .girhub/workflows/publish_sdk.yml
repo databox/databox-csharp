@@ -1,0 +1,41 @@
+name: Trigger SDK Generation
+on:
+  repository_dispatch:
+    types: [publish_sdk]
+
+jobs:
+
+  pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Load Config
+        id: config
+        run: |
+          echo "::set-output name=config::$(cat .github/sdk-config.json)"
+      
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Generate migration changes
+          title: '[SDK release] Generated SDK release'
+          branch: 'release/${{ github.event.client_payload.version }}/${{ github.event.client_payload.timestamp }}'
+          body: >            
+            This is a release of the SDK based on the latest API changes for `data-link` [${{ github.event.client_payload.version }}](${{ github.event.client_payload.release_url }}).
+          labels: |
+            automated
+            ${{ github.event.client_payload.labels }}
+
+  # generate:
+  #   needs: config
+  #   uses: databox/.github/.github/workflows/generate_sdk.yml@master
+  #   if: needs.config.outputs.config != ''
+  #   secrets: inherit
+  #   with:
+  #     language: csharp
+  #     config: ${{ toJson(needs.config.outputs.config) }}
+  #     version: ${{ needs.config.outputs.version }}
+  

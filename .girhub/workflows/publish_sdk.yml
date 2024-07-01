@@ -1,5 +1,18 @@
 name: Trigger SDK Generation
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version of the SDK to generate'
+        required: true
+        default: 'latest'
+      release_url:
+        description: 'The URL of the release notes for the SDK'
+        required: true
+      labels:
+        description: 'The labels to apply to the pull request'
+        required: true
+        default: 'sdk'
   repository_dispatch:
     types: [publish_sdk]
 

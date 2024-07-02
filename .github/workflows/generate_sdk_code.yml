@@ -5,7 +5,8 @@ on:
 env:
   GENERATOR_VERISON: "7.6.0"
 jobs:
-  pull_request:
+  sdk:
+    name: Generate SDK code
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +19,7 @@ jobs:
           owner: ${{ github.repository_owner }}
           repo:  ${{ github.repository }}
           excludes: prerelease, draft
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_APPROVE_PR }}
 
       - name: Determine Version
         id: version

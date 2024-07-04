@@ -70,6 +70,7 @@ jobs:
 
       - name: Generate SDK
         run: |
+          ls -la ${{ runner.temp }}/openapispec
           java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/${{ github.event.client_payload.openapi_spec }} -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }}
       
       - name: Create Pull Request

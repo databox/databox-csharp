@@ -1,0 +1,10 @@
+name: Pull Request Labels
+
+on:
+  pull_request:
+    types: [opened, reopened, labeled, unlabeled, edited, synchronize]
+    branches: [master]
+
+jobs:
+  label:
+    uses: databox/.github/.github/workflows/require-labels.yml@master

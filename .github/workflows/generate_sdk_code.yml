@@ -86,4 +86,4 @@ jobs:
             This is a release of the SDK based on the API changes for `data-link` [${{ github.event.client_payload.version }}](${{ github.event.client_payload.release_url }}).
           labels: |
             automated
-            ${{ github.event.client_payload.labels }}
+            ${{ github.event.client_payload.labels || 'patch' }}

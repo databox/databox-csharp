@@ -54,7 +54,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ github.event.client_payload.openapi_spec }}
-          path: ${{ runner.temp }}/openapi.yml
+          path: ${{ runner.temp }}/openapispec
           repository: databox/data-link
           github-token: ${{ secrets.PAT_APPROVE_PR }}
           run-id: ${{ github.event.client_payload.run_id }}
@@ -70,7 +70,7 @@ jobs:
 
       - name: Generate SDK
         run: |
-          java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapi.yml -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }}
+          java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/${{ github.event.client_payload.openapi_spec }} -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }}
       
       - name: Create Pull Request
         id: cpr

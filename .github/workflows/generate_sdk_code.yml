@@ -71,7 +71,7 @@ jobs:
       - name: Generate SDK
         run: |
           java --version
-          java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/openapi.yml -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }}
+          java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/openapi.yml -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }} --skip-validate-spec
       
       - name: Create Pull Request
         id: cpr

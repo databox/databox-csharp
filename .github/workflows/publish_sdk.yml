@@ -5,9 +5,6 @@ on:
       - master
     paths:
       - 'src/**'
-    paths-ignore:
-      - '.github/**'
-      - 'README.md'
 jobs:
   release_draft:
     name: Create release draft

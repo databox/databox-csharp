@@ -56,6 +56,7 @@ jobs:
           path: ${{ runner.temp }}/openapi.yml
           repository: databox/data-link
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.client_payload.run_id }}
 
       - name: Remove old SDK
         run: rm -rf src/*

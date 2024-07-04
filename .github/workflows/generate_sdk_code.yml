@@ -87,18 +87,3 @@ jobs:
           labels: |
             automated
             ${{ github.event.client_payload.labels || 'patch' }}
-
-      - name: Approve Pull Request
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        uses: juliangruber/approve-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.PAT_APPROVE_PR }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
-    
-      - name: Merge Pull Request
-        uses: juliangruber/merge-pull-request-action@v1
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
-          method: merge

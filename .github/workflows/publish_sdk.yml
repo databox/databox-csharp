@@ -45,7 +45,7 @@ jobs:
       working-directory: src
 
     - name: Push
-      run: dotnet nuget push  ${{ runner.temp }}/Databox.${{ steps.create_release_draft.outputs.tag_name }}.nupkg --source https://nuget.pkg.github.com/databox/index.json --api-key "${{ secrets.PACKAGES_PUBLISH_TOKEN }}"
+      run: dotnet nuget push  ${{ runner.temp }}/Databox.${{needs.release_draft.outputs.release_tag}}.nupkg --source https://nuget.pkg.github.com/databox/index.json --api-key "${{ secrets.PACKAGES_PUBLISH_TOKEN }}"
       working-directory: src
 
   release_publish:

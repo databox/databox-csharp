@@ -63,6 +63,8 @@ jobs:
 
       - name: Set SDK version
         run: |
+          pwd
+          ls -la
           cp ./.github/sdk-gen-config.yml ${{ runner.temp }}/sdk-gen-config.yml
           sed -i "s/{VERSION}/${{ steps.version.outputs.result }}/g" ${{ runner.temp }}/sdk-gen-config.yml
 

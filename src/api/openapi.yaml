@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   description: Push API resources Open API documentation
   title: Static OpenAPI document of Push API resource
-  version: "1.0"
+  version: 0.3.15-sdk.2
 servers:
 - description: Dev mode server description
   url: http://localhost:8080/q/openapi

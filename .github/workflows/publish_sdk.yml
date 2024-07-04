@@ -5,6 +5,7 @@ on:
       - master
 jobs:
   release_draft:
+    name: Create release draft
     runs-on: ubuntu-latest
     outputs:
       release_body: ${{ steps.create_release_draft.outputs.body }}
@@ -21,6 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
+    name: Build and publish SDK package
     runs-on: ubuntu-latest
     needs: release_draft
     timeout-minutes: 15
@@ -49,6 +51,7 @@ jobs:
       working-directory: src
 
   release_publish:
+    name: Publish release
     runs-on: ubuntu-latest
     needs: 
       - release_draft
@@ -62,6 +65,7 @@ jobs:
           release_id: ${{ needs.release_draft.outputs.release_id }}
 
   post_slack_job:
+    name: Post info to Slack in #engeering-releases channel
     needs:
       - release_draft
       - release_publish     

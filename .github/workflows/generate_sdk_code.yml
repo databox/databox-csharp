@@ -80,7 +80,7 @@ jobs:
           base: master
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore: release data-link SDK'
-          title: '[SDK release] Generated SDK release'
+          title: '[SDK release] Generated SDK code based on data-link API changes'
           branch: 'release/${{ github.event.client_payload.version }}/${{ github.event.client_payload.timestamp }}'
           body: >            
             This is a release of the SDK based on the API changes for `data-link` [${{ github.event.client_payload.version }}](${{ github.event.client_payload.release_url }}).

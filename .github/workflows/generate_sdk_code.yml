@@ -1,4 +1,4 @@
-name: Trigger SDK Generation
+name: Generate SDK Code
 on:
   repository_dispatch:
     types: [publish_sdk]
@@ -72,7 +72,7 @@ jobs:
         run: |
           java --version
           java -jar ${{ runner.temp }}/openapi-generator-cli.jar generate -i ${{ runner.temp }}/openapispec/openapi.yml -g csharp -o ./src -c ${{ runner.temp }}/${{ env.CONFIG_FILE }} --skip-validate-spec
-      
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6
@@ -87,3 +87,18 @@ jobs:
           labels: |
             automated
             ${{ github.event.client_payload.labels || 'patch' }}
+
+      - name: Approve Pull Request
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.PAT_APPROVE_PR }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
+    
+      - name: Merge Pull Request
+        uses: juliangruber/merge-pull-request-action@v1
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
+          method: merge

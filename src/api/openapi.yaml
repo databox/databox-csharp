@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  description: Push API resources Open API documentation
+  title: Static OpenAPI document of Push API resource
+  version: "1.0"
+servers:
+- description: Dev mode server description
+  url: http://localhost:8080/q/openapi
+paths:
+  /:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayloadModel'
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                status: OK
+                message: ""
+          description: OK
+        "400":
+          content:
+            application/json:
+              example:
+                status: Bad Request
+                message: Bad request - Exceeded request count limit!
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              example:
+                status: Unauthorized
+                message: Unauthorized - Invalid token!
+          description: Unauthorized
+        "500":
+          content:
+            application/json:
+              example:
+                status: Internal Server Error
+                message: An unhandled exception occurred while processing your request!
+          description: Internal Server Error
+components:
+  schemas:
+    PayloadModel:
+      example:
+        data:
+        - $<metric_name>: 123.4
+          date: 2021-03-01 00:00:00
+          <dimension_name>: Organic
+          unit: USD
+        - $<metric_name>: 123.4
+          periodFrom: 2021-03-01 00:00:00
+          periodTo: 2021-03-16 00:00:00
+          <dimension_name>: Organic
+          unit: USD
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PayloadDataModel'
+          type: array
+      type: object
+    PayloadDataModel:
+      properties:
+        $<metric_name>:
+          description: example metric name would be '$sales'
+          type: number
+        <dimension_name>:
+          description: example dimension would be 'channel'
+          type: string
+        unit:
+          type: string
+        periodFrom:
+          description: required if date not provided
+          type: string
+        periodTo:
+          description: required if date not provided
+          type: string
+        date:
+          description: required periods not provided
+          type: string
+      required:
+      - "$<metric_name>,"
+      - date
+      type: object
+    ApiResponse:
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+      type: object
+  securitySchemes:
+    basicAuth:
+      scheme: basic
+      type: http
+

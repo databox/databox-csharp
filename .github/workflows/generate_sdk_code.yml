@@ -70,7 +70,7 @@ jobs:
           sed -i "s/{VERSION}/${{ steps.version.outputs.result }}/g" ${{ runner.temp }}/${{ env.CONFIG_FILE }}
           
           #set API version
-          sed -i 's/version: "1.0"/${{ github.event.client_payload.version  }}/g' ${{ runner.temp }}/openapispec/openapi.yml
+          sed -i 's/version: "1.0"/version: ${{ github.event.client_payload.version  }}/g' ${{ runner.temp }}/openapispec/openapi.yml
 
       - name: Generate SDK
         run: |

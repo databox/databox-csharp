@@ -63,10 +63,9 @@ jobs:
 
       - name: Set SDK version
         run: |
-          pwd
-          ls -la
-          cp ./.github/sdk-gen-config.yml ${{ runner.temp }}/sdk-gen-config.yml
-          sed -i "s/{VERSION}/${{ steps.version.outputs.result }}/g" ${{ runner.temp }}/sdk-gen-config.yml
+          cp .github/sdk-gen-config.json ${{ runner.temp }}/sdk-gen-config.json
+          sed -i "s/{VERSION}/${{ steps.version.outputs.result }}/g" ${{ runner.temp }}/sdk-gen-config.json
+          cat ${{ runner.temp }}/sdk-gen-config.json
 
       - name: Generate SDK
         run: |
@@ -76,6 +75,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
+          base: master
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore: release data-link SDK'
           title: '[SDK release] Generated SDK release'

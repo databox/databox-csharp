@@ -9,7 +9,7 @@ namespace Example {
 
       Configuration config = new Configuration ();
       config.BasePath = "https://push.databox.com";
-      config.Username = "03f3b8668c01423b9154a247defacee5";
+      config.Username = "<Your_Databox_API_Token>";
       config.DefaultHeaders.Add("Accept", "application/vnd.databox.v2+json");
 
 
